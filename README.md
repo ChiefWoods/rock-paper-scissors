@@ -1,1 +1,3 @@
-# odin-rock-paper-scissors
+# Rock-Paper-Scissors
+
+Web game for The Odin Project
