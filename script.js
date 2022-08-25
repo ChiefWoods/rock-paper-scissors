@@ -67,13 +67,15 @@ function playRound(playerSelection, computerSelection) {
       break;
   }
 
-  if (playerWins == 5) {
+  if (playerWins >= 5) {
     endMessage.textContent = "Congratulations! You won the best of 5 in Rock-Paper-Scissors!";
     results.insertBefore(endMessage, chosenGuesses);
+    buttons.forEach(button => button.setAttribute('disabled', ""));
   }
-  else if (computerWins == 5) {
+  else if (computerWins >= 5) {
     endMessage.textContent = "Bummer! Better luck next time!";
     results.insertBefore(endMessage, chosenGuesses);
+    buttons.forEach(button => button.setAttribute('disabled', ""));
   }
 }
 
@@ -104,16 +106,8 @@ const chosenGuesses = document.createElement('h1');
 const roundResult = document.createElement('p');
 const playerScore = document.createElement('p');
 const computerScore = document.createElement('p');
+const endMessage = document.createElement('p');
 buttons.forEach(button => button.addEventListener('click', () => {
   playRound(button.id, getComputerChoice());
 }));
-// }
-const endMessage = document.createElement('p');
-if (playerWins == 5) {
-  endMessage.textContent = "Congratulations! You won the best of 5 in Rock-Paper-Scissors!";
-  results.appendChild(endMessage);
-}
-else if (computerWins == 5) {
-  endMessage.textContent = ("Bummer! Better luck next time!");
-  results.appendChild(endMessage);
-}
+
