@@ -67,33 +67,17 @@ function playRound(playerSelection, computerSelection) {
       break;
   }
 
-  if (playerWins == 5) {
+  if (playerWins >= 5) {
     endMessage.textContent = "Congratulations! You won the best of 5 in Rock-Paper-Scissors!";
     results.insertBefore(endMessage, chosenGuesses);
+    buttons.forEach(button => button.setAttribute('disabled', ""));
   }
-  else if (computerWins == 5) {
+  else if (computerWins >= 5) {
     endMessage.textContent = "Bummer! Better luck next time!";
     results.insertBefore(endMessage, chosenGuesses);
+    buttons.forEach(button => button.setAttribute('disabled', ""));
   }
 }
-
-/* function game() {
-  var playerSelection;
-    for (let i = 0; i < 5; i++) {
-    playerSelection = prompt("Enter 'rock', 'paper' or 'scissors':").toLowerCase();
-    while (playerSelection != 'rock' && playerSelection != 'paper' && playerSelection != 'scissors') {
-      playerSelection = prompt("Invalid input! Please enter either 'rock', 'paper' or 'scissors':").toLowerCase();
-    }
-    playRound(playerSelection, getComputerChoice());
-  }
-  if (playerWins > computerWins) {
-    console.log("Congratulations! You won the best of 5 in Rock-Paper-Scissors!");
-  }
-  else if (playerWins < computerWins) {
-    console.log("Bummer! Better luck next time!");
-  }
-  else console.log("Tie! Both you and the computer ended the game with the same points");
-} */
 
 var playerWins = 0;
 var computerWins = 0;
@@ -104,16 +88,8 @@ const chosenGuesses = document.createElement('h1');
 const roundResult = document.createElement('p');
 const playerScore = document.createElement('p');
 const computerScore = document.createElement('p');
+const endMessage = document.createElement('p');
 buttons.forEach(button => button.addEventListener('click', () => {
   playRound(button.id, getComputerChoice());
 }));
-// }
-const endMessage = document.createElement('p');
-if (playerWins == 5) {
-  endMessage.textContent = "Congratulations! You won the best of 5 in Rock-Paper-Scissors!";
-  results.appendChild(endMessage);
-}
-else if (computerWins == 5) {
-  endMessage.textContent = ("Bummer! Better luck next time!");
-  results.appendChild(endMessage);
-}
+
