@@ -36,7 +36,7 @@ function hasGameEnded() {
     buttons.forEach(button => button.setAttribute('disabled', ""));
     const restart = document.createElement('button');
     restart.textContent = 'Play Again?';
-    body.appendChild(restart);
+    document.body.appendChild(restart);
     restart.addEventListener('click', () => {
       reset();
       restart.remove();
@@ -52,20 +52,30 @@ function hasGameEnded() {
 
 function reset() {
   round = 0, playerWins = 0, computerWins = 0;
-  roundsPlayed.textContent = "";
-  chosenChoices.textContent = "";
-  outcome.textContent = "";
-  playerScore.textContent = "";
-  computerScore.textContent = "";
-  endMessage.textContent = "";
+  while (results.firstChild) {
+    results.firstChild.remove();
+  }
   buttons.forEach(button => button.removeAttribute('disabled'));
-  introMessage.textContent = "Select one of the choices above to start the game";
-};
+  introMessage.style.display = 'block';
+}
+
+function initialize() {
+  roundsPlayed = document.createElement('h2');
+  chosenChoices = document.createElement('h2');
+  outcome = document.createElement('p');
+  playerScore = document.createElement('p');
+  computerScore = document.createElement('p');
+  endMessage = document.createElement('h3');
+  results.append(roundsPlayed, chosenChoices, outcome, playerScore, computerScore, endMessage);
+}
 
 function playGame() {
   buttons.forEach(button => button.addEventListener('click', () => {
+    if (round == 0) {
+      initialize();
+      introMessage.style.display = 'none';
+    }
     playerChoice = button.getAttribute('class');
-    introMessage.textContent = "";
     getComputerChoice();
     roundCounter();
     roundOutcome();
@@ -75,23 +85,11 @@ function playGame() {
   }));
 }
 
-const body = document.querySelector('body');
+var playerChoice, computerChoice, firstWord, round = 0, playerWins = 0, computerWins = 0;
+var roundsPlayed, chosenChoices, outcome, playerScore, computerScore, endMessage;
+
 const introMessage = document.querySelector('.intro');
 const buttons = document.querySelectorAll('button');
 const results = document.querySelector('.results');
-const roundsPlayed = document.createElement('h2');
-results.appendChild(roundsPlayed);
-const chosenChoices = document.createElement('h2');
-results.appendChild(chosenChoices);
-const outcome = document.createElement('p');
-results.appendChild(outcome);
-const playerScore = document.createElement('p');
-results.appendChild(playerScore);
-const computerScore = document.createElement('p');
-results.appendChild(computerScore);
-const endMessage = document.createElement('h3');
-results.appendChild(endMessage);
 
-var playerChoice, computerChoice, firstWord, round = 0, playerWins = 0, computerWins = 0;
 playGame();
-
