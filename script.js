@@ -33,20 +33,49 @@ function roundOutcome() {
 
 function hasGameEnded() {
   if (playerWins == 5 || computerWins == 5) {
-    const endMessage = document.createElement('h3');
     buttons.forEach(button => button.setAttribute('disabled', ""));
+    const restart = document.createElement('button');
+    restart.textContent = 'Play Again?';
+    body.appendChild(restart);
+    restart.addEventListener('click', () => {
+      reset();
+      restart.remove();
+    });
     if (playerWins == 5) {
       endMessage.textContent = "Congratulations! You won the best of 5 in Rock-Paper-Scissors!";
     }
     else {
       endMessage.textContent = "Bummer! Better luck next time!";
     }
-    results.appendChild(endMessage);
   }
 }
 
-var round = 0, playerChoice, computerChoice, firstWord, playerWins = 0, computerWins = 0;
+function reset() {
+  round = 0, playerWins = 0, computerWins = 0;
+  roundsPlayed.textContent = "";
+  chosenChoices.textContent = "";
+  outcome.textContent = "";
+  playerScore.textContent = "";
+  computerScore.textContent = "";
+  endMessage.textContent = "";
+  buttons.forEach(button => button.removeAttribute('disabled'));
+  introMessage.textContent = "Select one of the choices above to start the game";
+};
 
+function playGame() {
+  buttons.forEach(button => button.addEventListener('click', () => {
+    playerChoice = button.getAttribute('class');
+    introMessage.textContent = "";
+    getComputerChoice();
+    roundCounter();
+    roundOutcome();
+    hasGameEnded();
+    playerScore.textContent = `Player score = ${playerWins}`;
+    computerScore.textContent = `Computer score = ${computerWins}`;
+  }));
+}
+
+const body = document.querySelector('body');
 const introMessage = document.querySelector('.intro');
 const buttons = document.querySelectorAll('button');
 const results = document.querySelector('.results');
@@ -60,15 +89,9 @@ const playerScore = document.createElement('p');
 results.appendChild(playerScore);
 const computerScore = document.createElement('p');
 results.appendChild(computerScore);
+const endMessage = document.createElement('h3');
+results.appendChild(endMessage);
 
-buttons.forEach(button => button.addEventListener('click', () => {
-  playerChoice = button.getAttribute('class');
-  introMessage.textContent = "";
-  getComputerChoice();
-  roundCounter();
-  roundOutcome();
-  hasGameEnded();
-  playerScore.textContent = `Player score = ${playerWins}`;
-  computerScore.textContent = `Computer score = ${computerWins}`
-}));
+var playerChoice, computerChoice, firstWord, round = 0, playerWins = 0, computerWins = 0;
+playGame();
 
