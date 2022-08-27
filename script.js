@@ -6,7 +6,6 @@ function getComputerChoice() {
 function roundCounter() {
   round += 1;
   roundsPlayed.textContent = `Round ${round}`;
-  console.log(round);
 }
 
 function roundOutcome() {
@@ -72,8 +71,7 @@ function playGame() {
     roundOutcome();
     hasGameEnded();
     playerScore.textContent = `Player score = ${playerWins}`;
-    computerScore.textContent = `Computer score = ${computerWins}`
-    console.log("Player wins = " + playerWins + ", Computer wins = " + computerWins);
+    computerScore.textContent = `Computer score = ${computerWins}`;
   }));
 }
 
