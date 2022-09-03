@@ -1,3 +1,3 @@
-# odin-rock-paper-scissors
+# Rock-Paper-Scissors
 
-Project on rock paper scissors
+Project for The Odin Project
