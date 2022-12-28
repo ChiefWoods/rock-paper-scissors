@@ -1,3 +1,3 @@
 # Rock-Paper-Scissors
 
-Project for The Odin Project
+Web game for The Odin Project
