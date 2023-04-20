@@ -1,35 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rock Paper Scissors</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+  </head>
 
-<body>
-  <main>
-    <h1>Welcome to Rock, Paper, Scissors!</h1>
-    <h2>First to reach 5 points wins!</h2>
-    <h3 class="intro">Select one of the moves below to start the game...</h3>
-    <div>
-      <button value="rock">Rock</button>
-      <button value="paper">Paper</button>
-      <button value="scissors">Scissors</button>
-    </div>
-    <div class="results"></div>
-  </main>
-  <footer>
-    <span class="made-by">Copyright @
-      <script>document.write(new Date().getFullYear())</script> ChiefWoods
-    </span>
-    <a class="github-link" href="https://github.com/ChiefWoods/rock-paper-scissors" target="_blank">
-      <img src="./icons/github.svg" class="github-icon" alt="GitHub">
-    </a>
-  </footer>
-</body>
+  <body>
+    <main>
+      <h1 class="title">ROCK PAPER SCISSORS</h1>
+      <h2 class="message blink">FIRST TO REACH 5 POINTS WINS<br>CHOOSE A MOVE TO START GAME</h2>
+      <div class="result">
+        <div class="result-player">
+          <p class="score-player">PLAYER : 0</p>
+        </div>
+        <div class="result-computer">
+          <p class="score-computer">COMPUTER : 0</p>
+        </div>
+      </div>
+      <div class="container-move">
+        <button class="move" value="rock">
+          <img src="./icons/hand-back-fist-solid.svg" class="rock">
+        </button>
+        <button class="move" value="paper">
+          <img src="./icons/hand-solid.svg" class="paper">
+        </button>
+        <button class="move" value="scissors">
+          <img src="./icons/hand-scissors-solid.svg" class="scissors">
+        </button>
+      </div>
+      <button value="play-again" disabled>PLAY AGAIN</button>
+    </main>
+    <footer>
+      <span class="made-by">Copyright @
+        <script>document.write(new Date().getFullYear())</script> ChiefWoods
+      </span>
+      <a class="github-link" href="https://github.com/ChiefWoods/rock-paper-scissors" target="_blank">
+        <img src="./icons/github.svg" class="github-icon" alt="GitHub">
+      </a>
+    </footer>
+  </body>
 
 </html>

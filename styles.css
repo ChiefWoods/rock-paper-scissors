@@ -1,3 +1,26 @@
+@font-face {
+  font-family: Retro Gaming;
+  src: url(./fonts/retro_gaming/Retro\ Gaming.ttf);
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +29,10 @@
 
 html {
   font-size: 62.5%;
+  font-family: Retro Gaming, monospace;
+  color: var(--arcade-yellow);
   --github-black: #0D1117;
+  --arcade-yellow: #F6EB14;
 }
 
 body {
@@ -16,8 +42,128 @@ body {
   min-width: calc(100vw - (100vw - 100%));
 }
 
+/* Main */
+
 main {
   flex: 1;
+  padding: 70px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background-image: url(./images/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.title {
+  font-size: 4rem;
+  color: var(--arcade-yellow);
+}
+
+.message {
+  height: 40px;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.blink {
+  animation: blink 1s steps(2, jump-none) infinite alternate;
+}
+
+.fade {
+  animation: fade 1.5s infinite alternate;
+}
+
+.result {
+  display: flex;
+  gap: 40px;
+  height: 100px;
+}
+
+.result-player,
+.result-computer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100px;
+}
+
+.score-player,
+.score-computer {
+  font-size: 1.2rem;
+}
+
+.move-player,
+.move-computer {
+  width: 80px;
+  height: 80px;
+  padding: 10px;
+}
+
+.container-move {
+  display: flex;
+  gap: 25px;
+}
+
+.move {
+  cursor: pointer;
+  padding: 20px;
+  background-color: var(--arcade-yellow);
+  border-radius: 50%;
+}
+
+.move:hover {
+  transform: scale(1.05);
+}
+
+.move:disabled {
+  opacity: 0.3;
+}
+
+.container-move > button > img {
+  width: 80px;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  pointer-events: none;
+}
+
+.rock,
+.paper {
+  transform: rotate(90deg);
+}
+
+.scissors {
+  transform: rotate(180deg) scaleY(-1);
+}
+
+.rock.move-computer,
+.paper.move-computer {
+  transform: rotate(270deg) scaleX(-1);
+}
+
+.scissors.move-computer {
+  transform: none;
+}
+
+[value='play-again'] {
+  cursor: pointer;
+  font-family: 'Retro Gaming', monospace;
+  font-size: 20px;
+  color: var(--arcade-yellow);
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+[value='play-again']:disabled {
+  opacity: 0.3;
+}
+
+[value='play-again']:active {
+  color: #d7ce17;
+  background-color: rgb(209, 209, 209);
 }
 
 /* Footer */
