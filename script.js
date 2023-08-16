@@ -1,95 +1,74 @@
 function getComputerChoice() {
-  let choice;
-  let number = Math.floor(Math.random() * 10);
-  return (number <= 3 ? choice = "rock" : number > 3 && number <= 6 ? choice = "paper" : choice = "scissors");
+  const choice = ["rock", "paper", "scissors"];
+  return computerChoice = choice[Math.floor(Math.random() * 3)];
 }
 
-function playRound(playerSelection, computerSelection) {
-  chosenGuesses.textContent = `You chose ${playerSelection} and the computer chose ${computerSelection}...`;
-  results.appendChild(chosenGuesses);
+function roundCounter() {
+  round += 1;
+  roundsPlayed.textContent = `Round ${round}`;
+}
 
-  function appendScore() {
-    results.appendChild(roundResult);
-    playerScore.textContent = `Player score = ${playerWins}`;
-    computerScore.textContent = `Computer score = ${computerWins}`;
-    results.appendChild(playerScore);
-    results.appendChild(computerScore);
-  }
-
-  switch (playerSelection) {
-    case 'rock':
-      if (playerSelection == computerSelection) {
-        roundResult.textContent = "No one wins this round";
-        appendScore();
-        break;
-      }
-      else if (computerSelection == "paper") {
-        roundResult.textContent = "You lose! Paper beats rock";
-        computerWins += 1;
-        appendScore();
-        break;
-      }
-      else roundResult.textContent = "You win! Rock beats scissors";
-      playerWins += 1;
-      appendScore();
+function roundOutcome() {
+  chosenChoices.textContent = `You chose ${playerChoice} and the computer chose ${computerChoice}...`;
+  switch (true) {
+    case (playerChoice == computerChoice):
+      outcome.textContent = `Tie! No one wins this round.`;
       break;
-    case 'paper':
-      if (playerSelection == computerSelection) {
-        roundResult.textContent = "No one wins this round";
-        appendScore();
-        break;
-      }
-      else if (computerSelection == "scissors") {
-        roundResult.textContent = ("You lose! Scissors beats paper");
-        computerWins += 1;
-        appendScore();
-        break;
-      }
-      else roundResult.textContent = ("You win! Paper beats rock");
-      playerWins += 1;
-      appendScore();
+    case (playerChoice == 'rock' && computerChoice == 'scissors'):
+    case (playerChoice == 'paper' && computerChoice == 'rock'):
+    case (playerChoice == 'scissors' && computerChoice == 'paper'):
+      firstWord = playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1);
+      outcome.textContent = `${firstWord} beats ${computerChoice}! Nice one.`;
+      playerWins++;
       break;
-    case 'scissors':
-      if (playerSelection == computerSelection) {
-        roundResult.textContent = ("No one wins this round");
-        appendScore();
-        break;
-      }
-      else if (computerSelection == "rock") {
-        roundResult.textContent = ("You lose! Rock beats scissors");
-        computerWins += 1;
-        appendScore();
-        break;
-      }
-      else roundResult.textContent = ("You win! Scissors beats paper");
-      playerWins += 1;
-      appendScore();
+    case (playerChoice == 'rock' && computerChoice == 'paper'):
+    case (playerChoice == 'paper' && computerChoice == 'scissors'):
+    case (playerChoice == 'scissors' && computerChoice == 'rock'):
+      firstWord = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
+      outcome.textContent = `${firstWord} beats ${playerChoice}! Unlucky...`;
+      computerWins++;
       break;
-  }
-
-  if (playerWins >= 5) {
-    endMessage.textContent = "Congratulations! You won the best of 5 in Rock-Paper-Scissors!";
-    results.insertBefore(endMessage, chosenGuesses);
-    buttons.forEach(button => button.setAttribute('disabled', ""));
-  }
-  else if (computerWins >= 5) {
-    endMessage.textContent = "Bummer! Better luck next time!";
-    results.insertBefore(endMessage, chosenGuesses);
-    buttons.forEach(button => button.setAttribute('disabled', ""));
   }
 }
 
-var playerWins = 0;
-var computerWins = 0;
+function hasGameEnded() {
+  if (playerWins == 5 || computerWins == 5) {
+    const endMessage = document.createElement('h3');
+    buttons.forEach(button => button.setAttribute('disabled', ""));
+    if (playerWins == 5) {
+      endMessage.textContent = "Congratulations! You won the best of 5 in Rock-Paper-Scissors!";
+    }
+    else {
+      endMessage.textContent = "Bummer! Better luck next time!";
+    }
+    results.appendChild(endMessage);
+  }
+}
 
+var round = 0, playerChoice, computerChoice, firstWord, playerWins = 0, computerWins = 0;
+
+const introMessage = document.querySelector('.intro');
 const buttons = document.querySelectorAll('button');
-const results = document.querySelector('#results');
-const chosenGuesses = document.createElement('h1');
-const roundResult = document.createElement('p');
+const results = document.querySelector('.results');
+const roundsPlayed = document.createElement('h2');
+results.appendChild(roundsPlayed);
+const chosenChoices = document.createElement('h2');
+results.appendChild(chosenChoices);
+const outcome = document.createElement('p');
+results.appendChild(outcome);
 const playerScore = document.createElement('p');
+results.appendChild(playerScore);
 const computerScore = document.createElement('p');
-const endMessage = document.createElement('p');
+results.appendChild(computerScore);
+
 buttons.forEach(button => button.addEventListener('click', () => {
-  playRound(button.id, getComputerChoice());
+  playerChoice = button.getAttribute('class');
+  introMessage.textContent = "";
+  getComputerChoice();
+  roundCounter();
+  roundOutcome();
+  hasGameEnded();
+  playerScore.textContent = `Player score = ${playerWins}`;
+  computerScore.textContent = `Computer score = ${computerWins}`
 }));
 
