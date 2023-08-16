@@ -5,54 +5,81 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-  console.log(`You chose ${playerSelection} and the computer chose ${computerSelection}...`);
+  chosenGuesses.textContent = `You chose ${playerSelection} and the computer chose ${computerSelection}...`;
+  results.appendChild(chosenGuesses);
+
+  function appendScore() {
+    results.appendChild(roundResult);
+    playerScore.textContent = `Player score = ${playerWins}`;
+    computerScore.textContent = `Computer score = ${computerWins}`;
+    results.appendChild(playerScore);
+    results.appendChild(computerScore);
+  }
 
   switch (playerSelection) {
     case 'rock':
       if (playerSelection == computerSelection) {
-        console.log("No one wins this round");
+        roundResult.textContent = "No one wins this round";
+        appendScore();
         break;
       }
       else if (computerSelection == "paper") {
-        console.log("You lose! Paper beats rock");
+        roundResult.textContent = "You lose! Paper beats rock";
         computerWins += 1;
+        appendScore();
         break;
       }
-      else console.log("You win! Rock beats scissors");
+      else roundResult.textContent = "You win! Rock beats scissors";
       playerWins += 1;
+      appendScore();
       break;
     case 'paper':
       if (playerSelection == computerSelection) {
-        console.log("No one wins this round");
+        roundResult.textContent = "No one wins this round";
+        appendScore();
         break;
       }
       else if (computerSelection == "scissors") {
-        console.log("You lose! Scissors beats paper");
+        roundResult.textContent = ("You lose! Scissors beats paper");
         computerWins += 1;
+        appendScore();
         break;
       }
-      else console.log("You win! Paper beats rock");
+      else roundResult.textContent = ("You win! Paper beats rock");
       playerWins += 1;
+      appendScore();
       break;
     case 'scissors':
       if (playerSelection == computerSelection) {
-        console.log("No one wins this round");
+        roundResult.textContent = ("No one wins this round");
+        appendScore();
         break;
       }
       else if (computerSelection == "rock") {
-        console.log("You lose! Rock beats scissors");
+        roundResult.textContent = ("You lose! Rock beats scissors");
         computerWins += 1;
+        appendScore();
         break;
       }
-      else console.log("You win! Scissors beats paper");
+      else roundResult.textContent = ("You win! Scissors beats paper");
       playerWins += 1;
+      appendScore();
       break;
+  }
+
+  if (playerWins == 5) {
+    endMessage.textContent = "Congratulations! You won the best of 5 in Rock-Paper-Scissors!";
+    results.insertBefore(endMessage, chosenGuesses);
+  }
+  else if (computerWins == 5) {
+    endMessage.textContent = "Bummer! Better luck next time!";
+    results.insertBefore(endMessage, chosenGuesses);
   }
 }
 
-function game() {
+/* function game() {
   var playerSelection;
-  for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {
     playerSelection = prompt("Enter 'rock', 'paper' or 'scissors':").toLowerCase();
     while (playerSelection != 'rock' && playerSelection != 'paper' && playerSelection != 'scissors') {
       playerSelection = prompt("Invalid input! Please enter either 'rock', 'paper' or 'scissors':").toLowerCase();
@@ -66,8 +93,27 @@ function game() {
     console.log("Bummer! Better luck next time!");
   }
   else console.log("Tie! Both you and the computer ended the game with the same points");
-}
+} */
 
 var playerWins = 0;
 var computerWins = 0;
-game();
+
+const buttons = document.querySelectorAll('button');
+const results = document.querySelector('#results');
+const chosenGuesses = document.createElement('h1');
+const roundResult = document.createElement('p');
+const playerScore = document.createElement('p');
+const computerScore = document.createElement('p');
+buttons.forEach(button => button.addEventListener('click', () => {
+  playRound(button.id, getComputerChoice());
+}));
+// }
+const endMessage = document.createElement('p');
+if (playerWins == 5) {
+  endMessage.textContent = "Congratulations! You won the best of 5 in Rock-Paper-Scissors!";
+  results.appendChild(endMessage);
+}
+else if (computerWins == 5) {
+  endMessage.textContent = ("Bummer! Better luck next time!");
+  results.appendChild(endMessage);
+}
