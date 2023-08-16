@@ -1,0 +1,45 @@
+:root {
+  overflow-x: hidden;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* Footer */
+
+footer {
+  height: 55px;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  background-color: #0D1117;
+}
+
+.made-by {
+  color: white;
+  font-size: 15px;
+  font-family: cursive;
+  margin: 0 auto;
+}
+
+.github-link {
+  position: relative;
+  right: 37.5px;
+}
+
+.github-icon {
+  height: 27.5px;
+}
