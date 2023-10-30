@@ -1,7 +1,3 @@
-let hasGameEnded = false;
-let playerScore = 0;
-let computerScore = 0;
-
 const allMoves = ['rock', 'paper', 'scissors'];
 
 const message = document.querySelector('.message');
@@ -12,12 +8,17 @@ const scoreComputer = document.querySelector('.score-computer');
 const moves = document.querySelectorAll('.move');
 const playAgain = document.querySelector('button[value="play-again"]');
 
+let hasGameEnded = false;
+let playerScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
   return allMoves[Math.floor(Math.random() * 3)];
 }
 
 function playRound(playerMove, computerMove) {
   displayMove(playerMove, computerMove);
+
   if (playerMove === computerMove) {
     message.textContent = 'TIE! NO ONE WINS THIS ROUND...';
   } else if (
@@ -46,6 +47,7 @@ function displayMove(playerMove, computerMove) {
 function removeIcons() {
   const movePlayer = resultPlayer.querySelector('.move-player');
   const moveComputer = resultComputer.querySelector('.move-computer');
+
   if (movePlayer !== null && moveComputer !== null) {
     movePlayer.remove();
     moveComputer.remove();
@@ -54,6 +56,7 @@ function removeIcons() {
 
 function loadIcon(move, target) {
   const img = document.createElement('img');
+
   switch (move) {
     case 'rock':
       img.src = './icons/hand-back-fist-solid.svg';
@@ -70,6 +73,7 @@ function loadIcon(move, target) {
       img.alt = 'Scissors';
       img.classList.add('scissors');
   }
+  
   if (target === 'player') {
     img.classList.add('move-player');
     resultPlayer.prepend(img);
