@@ -23,25 +23,10 @@
   }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 62.5%;
+:root {
+  --arcade-yellow: #F6EB14;
   font-family: Retro Gaming, monospace;
   color: var(--arcade-yellow);
-  --github-black: #0D1117;
-  --arcade-yellow: #F6EB14;
-}
-
-body {
-  display: inline-flex;
-  flex-direction: column;
-  min-height: 100vh;
-  min-width: calc(100vw - (100vw - 100%));
 }
 
 /* Main */
@@ -171,31 +156,7 @@ main {
   background-color: rgb(209, 209, 209);
 }
 
-/* Footer */
-
-footer {
-  display: flex;
-  align-items: center;
-  background-color: var(--github-black);
-  padding: 12px 40px;
-}
-
-.made-by {
-  font-size: 12px;
-  font-family: cursive;
-  color: white;
-  margin: 0 auto;
-}
-
-.github-icon {
-  height: 25px;
-}
-
 @media (max-width: 992px) {
-  html {
-    font-size: 67.5%;
-  }
-
   .title {
     font-size: 3rem;
   }
@@ -215,10 +176,6 @@ footer {
 }
 
 @media (max-width: 576px) {
-  html {
-    font-size: 72.5%;
-  }
-
   .title {
     font-size: 2.7rem;
   }
